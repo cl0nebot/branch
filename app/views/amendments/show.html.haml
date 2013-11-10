@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @amendment.user_id
+%p
+  %b Proposal:
+  = @amendment.proposal_id
+%p
+  %b Subject:
+  = @amendment.subject
+%p
+  %b Body:
+  = @amendment.body
+%p
+  %b Upvotes:
+  = @amendment.upvotes
+%p
+  %b Downvotes:
+  = @amendment.downvotes
+%p
+  %b Confidence:
+  = @amendment.confidence
+%p
+  %b Heat:
+  = @amendment.heat
+
+= link_to 'Edit', edit_amendment_path(@amendment)
+\|
+= link_to 'Back', amendments_path

@@ -1,0 +1,33 @@
+%h1 Listing comments
+
+%table
+  %tr
+    %th User
+    %th Parent
+    %th Parent type
+    %th Body
+    %th Upvotes
+    %th Downvotes
+    %th Confidence
+    %th Heat
+    %th
+    %th
+    %th
+
+  - @comments.each do |comment|
+    %tr
+      %td= comment.user_id
+      %td= comment.parent_id
+      %td= comment.parent_type
+      %td= comment.body
+      %td= comment.upvotes
+      %td= comment.downvotes
+      %td= comment.confidence
+      %td= comment.heat
+      %td= link_to 'Show', comment
+      %td= link_to 'Edit', edit_comment_path(comment)
+      %td= link_to 'Destroy', comment, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Comment', new_comment_path

@@ -1,0 +1,33 @@
+%h1 Listing amendments
+
+%table
+  %tr
+    %th User
+    %th Proposal
+    %th Subject
+    %th Body
+    %th Upvotes
+    %th Downvotes
+    %th Confidence
+    %th Heat
+    %th
+    %th
+    %th
+
+  - @amendments.each do |amendment|
+    %tr
+      %td= amendment.user_id
+      %td= amendment.proposal_id
+      %td= amendment.subject
+      %td= amendment.body
+      %td= amendment.upvotes
+      %td= amendment.downvotes
+      %td= amendment.confidence
+      %td= amendment.heat
+      %td= link_to 'Show', amendment
+      %td= link_to 'Edit', edit_amendment_path(amendment)
+      %td= link_to 'Destroy', amendment, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Amendment', new_amendment_path

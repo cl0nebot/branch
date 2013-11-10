@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @comment.user_id
+%p
+  %b Parent:
+  = @comment.parent_id
+%p
+  %b Parent type:
+  = @comment.parent_type
+%p
+  %b Body:
+  = @comment.body
+%p
+  %b Upvotes:
+  = @comment.upvotes
+%p
+  %b Downvotes:
+  = @comment.downvotes
+%p
+  %b Confidence:
+  = @comment.confidence
+%p
+  %b Heat:
+  = @comment.heat
+
+= link_to 'Edit', edit_comment_path(@comment)
+\|
+= link_to 'Back', comments_path
