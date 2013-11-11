@@ -1,0 +1,22 @@
+.container
+  .row
+    .col-lg-6
+      %h2 Sign in
+
+      = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+        = devise_error_messages!
+
+        %fieldset
+          .form-group
+            = f.label :email
+            = f.email_field :email, :autofocus => true, :class => 'form-control'
+
+          .form-group
+            = f.label :password
+            = f.password_field :password, :class => 'form-control'
+
+        = f.submit 'Sign In', :class => 'btn btn-primary btn-lg'
+
+      = render 'devise/shared/links'
+
+

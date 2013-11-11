@@ -7,8 +7,6 @@ gem 'rails', '4.0.1'
 gem 'sqlite3', '~> 1.3.0'
 gem 'therubyracer', '~> 0.12.0'
 
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
 gem 'haml-rails', '~> 0.4'
 gem 'less-rails-bootstrap', '~> 3.0.5'
 
