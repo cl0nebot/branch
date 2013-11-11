@@ -1,0 +1,14 @@
+- if user_signed_in?
+  .navbar-right
+    Welcome User
+- else
+  = form_for(User.new, :as => :user, :url => session_path(:user), html: { :class => 'navbar-form navbar-right'} ) do |f|
+    .form-group
+      = f.label :email, :class => 'sr-only'
+      = f.email_field :email, :placeholder => 'Enter Email', :class => 'form-control input-sm'
+
+    .form-group
+      = f.label :password, :class => 'sr-only'
+      = f.password_field :password, :placeholder => 'Password', :class => 'form-control input-sm'
+
+    = f.submit 'Sign in', :class => 'btn btn-primary btn-sm'
