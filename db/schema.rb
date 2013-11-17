@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131108042510) do
+ActiveRecord::Schema.define(version: 20131115211645) do
 
   create_table "amendments", force: true do |t|
     t.integer  "user_id"
@@ -25,6 +25,17 @@ ActiveRecord::Schema.define(version: 20131108042510) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "answers", force: true do |t|
+    t.integer  "profile_id"
+    t.integer  "question_id"
+    t.integer  "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "axis"
+  end
+
+  add_index "answers", ["axis"], name: "index_on_answer_axis"
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
@@ -50,7 +61,11 @@ ActiveRecord::Schema.define(version: 20131108042510) do
     t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "xcoord",      default: 0, null: false
+    t.integer  "ycoord",      default: 0, null: false
   end
+
+  add_index "profiles", ["xcoord", "ycoord"], name: "index_on_profile_coordinates"
 
   create_table "proposals", force: true do |t|
     t.string   "subject"
@@ -63,6 +78,16 @@ ActiveRecord::Schema.define(version: 20131108042510) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "questions", force: true do |t|
+    t.integer  "type"
+    t.integer  "parity"
+    t.string   "prompt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "questions", ["type", "parity"], name: "index_on_question_type_and_parity"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -77,6 +102,7 @@ ActiveRecord::Schema.define(version: 20131108042510) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "username"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
