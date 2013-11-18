@@ -11,4 +11,10 @@ class User < ActiveRecord::Base
 
   has_one :profile
 
+  has_many :feed_items
+
+  def friends_feed_items
+    ids = friends.pluck(:id)
+    FeedItem.where(user_id: ids)
+  end
 end

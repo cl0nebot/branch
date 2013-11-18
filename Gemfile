@@ -48,3 +48,4 @@ gem 'debugger', '~> 1.6.2'
 
 gem 'rspec-rails', '~> 2.0'
 gem 'simplecov', :require => false
+gem 'faker'

@@ -1,17 +1,19 @@
 Branch::Application.routes.draw do
   root 'pages#index'
 
+  devise_for :users
+
   resources :profiles
 
   resources :comments
 
   resources :amendments
 
-  resources :proposals
-
-  devise_for :users
+  resources :proposals, only: [:index, :new, :create]
 
   resources :friends, only: [:index, :create, :destroy]
+
+  resources :feed_items, only: [:index ]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

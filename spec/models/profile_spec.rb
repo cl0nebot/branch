@@ -116,7 +116,7 @@ describe Profile do
           ycoord: 6
         )
 
-        p1.match_percentage(p2).should eq(0.6)
+        p1.match_percentage(p2).should eq(0.4)
       end
 
       it "should find appropriate match % for 45 degrees" do
@@ -134,7 +134,7 @@ describe Profile do
 
 
         # we have to round because PI isn't exactly pi, thus it'll come up a little wrong
-        (p1.match_percentage(p2)*10).round.should eq(6)
+        (p1.match_percentage(p2)*10).round.should eq(4)
       end
     end
   end

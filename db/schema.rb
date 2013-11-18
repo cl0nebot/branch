@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131117231223) do
+ActiveRecord::Schema.define(version: 20131118022024) do
 
   create_table "amendments", force: true do |t|
     t.integer  "user_id"
@@ -46,6 +46,14 @@ ActiveRecord::Schema.define(version: 20131117231223) do
     t.integer  "downvotes"
     t.float    "confidence"
     t.float    "heat"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "feed_items", force: true do |t|
+    t.integer  "user_id"
+    t.string   "feedable_type"
+    t.integer  "feedable_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
