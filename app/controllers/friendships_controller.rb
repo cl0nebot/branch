@@ -7,13 +7,13 @@ class FriendshipsController < ApplicationController
   end
 
   def create
-    inverse = Friendships.where{(friend_id == current_user.id) & (user_id == params[:user_id])}.first
+    inverse = Friendships.where{(friend_id == current_user.id) & (user_id == params[:friend_id])}.first
 
     if inverse
       # Confirm a Friendship
       inverse.confirmed == true
       @friendship = current_user.friendships.build({
-        friend_id: params[:user_id],
+        friend_id: params[:friend_id],
         confirmed: true
       })
 
@@ -35,7 +35,7 @@ class FriendshipsController < ApplicationController
     else
       # Request a friendship
       @friendship = current_user.friendships.build({
-        friend_id: params[:user_id],
+        friend_id: params[:friend_id],
         confirmed: false
       })
 

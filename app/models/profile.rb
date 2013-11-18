@@ -27,7 +27,7 @@ class Profile < ActiveRecord::Base
     # hypotenuse before sqrt
     square_hyp = profile.xcoord**2 + profile.ycoord**2
     distance = Math.sqrt(square_hyp)
-    1 - distance.to_f/RADIUS.to_f
+    (1 - distance.to_f/RADIUS.to_f).abs
   end
 
   def coords
@@ -75,7 +75,7 @@ class Profile < ActiveRecord::Base
 
   private
 
-  def within_circle(x, y)
+  def within_circle?(x, y)
     (x - self.xcoord)**2 + (y - self.ycoord)**2 < RADIUS**2
   end
 

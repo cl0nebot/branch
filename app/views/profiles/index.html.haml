@@ -1,33 +1,6 @@
-%h1 Listing profiles
-
-%table
-  %tr
-    %th User
-    %th First name
-    %th Last name
-    %th Nickname
-    %th Middle name
-    %th Summary
-    %th City
-    %th State
-    %th
-    %th
-    %th
-
-  - @profiles.each do |profile|
-    %tr
-      %td= profile.user_id
-      %td= profile.first_name
-      %td= profile.last_name
-      %td= profile.nickname
-      %td= profile.middle_name
-      %td= profile.summary
-      %td= profile.city
-      %td= profile.state
-      %td= link_to 'Show', profile
-      %td= link_to 'Edit', edit_profile_path(profile)
-      %td= link_to 'Destroy', profile, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Profile', new_profile_path
+.container
+  %h1 Your matches
+  
+  %ol.unstyled
+    - @matches.each do |match|
+      = render partial: 'match', locals: {match: match}

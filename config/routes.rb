@@ -1,4 +1,5 @@
 Branch::Application.routes.draw do
+  get "matches/index"
   root 'pages#index'
 
   devise_for :users
@@ -11,7 +12,7 @@ Branch::Application.routes.draw do
 
   resources :proposals, only: [:index, :new, :create]
 
-  resources :friends, only: [:index, :create, :destroy]
+  resources :friendships, only: [:index, :create, :destroy]
 
   resources :feed_items, only: [:index ]
   # The priority is based upon order of creation: first created -> highest priority.

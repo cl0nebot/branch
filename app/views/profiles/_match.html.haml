@@ -1,0 +1,21 @@
+.panel.panel-default
+  .panel-body
+    .pull-left
+      %img.media-object
+
+    .article
+      %h4= full_name(match)
+      = match.summary
+
+  %footer.panel-footer
+    %strong
+      Match: 
+      = match_percentage(match)
+
+      .pull-right
+        = link_to "Add Friend", 
+          friendships_path,
+          method: :post,
+          friend_id: match.id,
+          :class => 'btn btn-primary'
+
