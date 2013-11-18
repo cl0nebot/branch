@@ -5,6 +5,7 @@ gem 'rails', '4.0.1'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.3.0'
+gem 'squeel'
 gem 'therubyracer', '~> 0.12.0'
 
 gem 'haml-rails', '~> 0.4'
@@ -46,3 +47,4 @@ gem 'devise', '~> 3.1.1'
 gem 'debugger', '~> 1.6.2'
 
 gem 'rspec-rails', '~> 2.0'
+gem 'simplecov', :require => false

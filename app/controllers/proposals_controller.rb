@@ -1,10 +1,11 @@
 class ProposalsController < ApplicationController
   before_action :set_proposal, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /proposals
   # GET /proposals.json
   def index
-    @proposals = Proposal.all
+    @proposals = current_user.feed
   end
 
   # GET /proposals/1
