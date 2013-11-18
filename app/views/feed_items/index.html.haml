@@ -1,10 +1,11 @@
-.container
-  %ul.unstyled
-    - @feed_items.each do |item|
-      %li
-        %article.panel.panel-default
-          %header.panel-heading
-            %strong=  link_to item.user.username 
-            = feed_item_verb(item)
-          .panel-body
-            = render item.feedable
+- content_for :title, "Feed"
+
+%ul.unstyled
+  - @feed_items.each do |item|
+    %li
+      %article.panel.panel-default
+        %header.panel-heading
+          %strong=  link_to item.user.username 
+          = feed_item_verb(item)
+        .panel-body
+          = render item.feedable

@@ -12,7 +12,7 @@
     user_id: u.id,
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
-    summary: Faker::Lorem.paragraph(2),
+    summary: Faker::Lorem.paragraph(10),
     city: Faker::Address.city,
     state: Faker::Address.state,
     xcoord: (SecureRandom.random_number * 200 - 100).to_i,
@@ -53,7 +53,7 @@ if Rails.env.development?
     user_id: u.id,
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
-    summary: Faker::Lorem.paragraph(2),
+    summary: Faker::Lorem.paragraph(10),
     city: Faker::Address.city,
     state: Faker::Address.state,
     xcoord: (SecureRandom.random_number * 200 - 100).to_i,
@@ -89,7 +89,7 @@ if Rails.env.development?
       user_id: friend.id,
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
-      summary: Faker::Lorem.paragraph(2),
+      summary: Faker::Lorem.paragraph(10),
       city: Faker::Address.city,
       state: Faker::Address.state,
       xcoord: (SecureRandom.random_number * 200 - 100).to_i,
@@ -122,4 +122,28 @@ if Rails.env.development?
 
     prop.save
   end
+
+  pass = SecureRandom.uuid
+  friend = User.create({
+    username: Faker::Internet.user_name,
+    email: Faker::Internet.email,
+    password: pass,
+    password_confirmation: pass
+  })
+
+  Profile.create({
+    user_id: friend.id,
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    summary: Faker::Lorem.paragraph(10),
+    city: Faker::Address.city,
+    state: Faker::Address.state,
+    xcoord: (SecureRandom.random_number * 200 - 100).to_i,
+    ycoord: (SecureRandom.random_number * 200 - 100).to_i
+  })
+
+  friend.friendships.create({
+    friend_id: u.id,
+    confirmed: false
+  })
 end

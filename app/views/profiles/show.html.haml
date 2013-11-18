@@ -1,30 +1,21 @@
-%p#notice= notice
+- content_for :title, full_name(@profile)
 
-%p
-  %b User:
-  = @profile.user_id
-%p
-  %b First name:
-  = @profile.first_name
-%p
-  %b Last name:
-  = @profile.last_name
-%p
-  %b Nickname:
-  = @profile.nickname
-%p
-  %b Middle name:
-  = @profile.middle_name
-%p
-  %b Summary:
-  = @profile.summary
-%p
-  %b City:
-  = @profile.city
-%p
-  %b State:
-  = @profile.state
+.container
+  .panel.panel-default
+    .panel-body
+      .pull-right
+        - if @profile.user_id == current_user.id
+        - elsif @profile.user.is_friend?(current_user)
+          %button.btn.btn-disabled Friend
+        - elsif @profile.user.is_pending_friend?(current_user)
+          = link_to "Confirm Friend", friendships_path(friend_id: @profile.user_id, authenticity: form_authenticity_token), method: :post, :class => 'btn btn-primary'
+        - else
+          = link_to "Add Friend", friendships_path(friend_id: @profile.user_id, authenticity: form_authenticity_token), method: :post, :class => 'btn btn-primary'
 
-= link_to 'Edit', edit_profile_path(@profile)
-\|
-= link_to 'Back', profiles_path
+      %h1= full_name(@profile)
+      #{@profile.city}, #{@profile.state}
+
+
+  .row
+    .col-lg-8
+      = @profile.summary

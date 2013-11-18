@@ -5,7 +5,7 @@
 
     .article
       %h4= full_name(match)
-      = match.summary
+      = truncate(match.summary, length: 150)
 
   %footer.panel-footer
     %strong
@@ -13,9 +13,5 @@
       = match_percentage(match)
 
       .pull-right
-        = link_to "Add Friend", 
-          friendships_path,
-          method: :post,
-          friend_id: match.id,
-          :class => 'btn btn-primary'
+        = link_to "Add Friend", friendships_path(friend_id: match.id, authenticity_token: form_authenticity_token), method: :post
 

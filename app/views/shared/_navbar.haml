@@ -10,6 +10,11 @@
 
     #navbar-collapse.collapse.navbar-collapse
       %ul.nav.navbar-nav
-        %li= link_to "About", pages_path('about')
+        - if user_signed_in?
+          %li= link_to "Feed", feed_items_path
+          %li= link_to "Matches", profiles_path
+          %li= link_to "Friends", friendships_path
+        -else
+          %li= link_to "About", pages_path('about')
 
       = render partial: 'devise/sessions/navbar_form'

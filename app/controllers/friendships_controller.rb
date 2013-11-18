@@ -2,12 +2,12 @@ class FriendshipsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @friends = current_user.confirmed_friendships
-    @pending = current_user.unconfirmed_friendships
+    @friendships = current_user.friendships.confirmed.includes(:user)
+    @requests = Friendship.where(friend_id: current_user.id).unconfirmed.includes(:user)
   end
 
   def create
-    inverse = Friendships.where{(friend_id == current_user.id) & (user_id == params[:friend_id])}.first
+    inverse = Friendship.where{(friend_id == my{current_user.id}) & (user_id == my{params[:friend_id]})}.first
 
     if inverse
       # Confirm a Friendship
@@ -17,17 +17,17 @@ class FriendshipsController < ApplicationController
         confirmed: true
       })
 
-      Frienship.transaction do
+      Friendship.transaction do
         if @friendship.save! && inverse.save!
           flash[:success] = "Friendship Confirmed"
           respond_to do |format|
-            format.html { redirect_to friends_path }
+            format.html { redirect_to friendships_path }
             format.json { render json: @friendship }
           end
         else
           flash[:error] = "Error confirming friendship"
           respond_to do |format|
-            format.html { redirect_to friends_path }
+            format.html { redirect_to friendships_path }
             format.json { render json: { error: flash[:error] } }
           end
         end
@@ -42,13 +42,13 @@ class FriendshipsController < ApplicationController
       if @friendship.save!
         flash[:success] = "Friendship Requested"
         respond_to do |format|
-          format.html { redirect_to matches_path }
+          format.html { redirect_to profiles_path }
           format.json { render json: @friendship }
         end
       else
         flash[:error] = "Error requesting friendship"
         respond_to do |format|
-          format.html { redirect_to matches_path }
+          format.html { redirect_to profiles_path }
           format.json { render json: { error: flash[:error] } }
         end
       end

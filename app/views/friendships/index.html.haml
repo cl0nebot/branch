@@ -1,0 +1,26 @@
+- content_for :title, "Friends"
+
+%h1 Friends
+
+- unless @requests.empty?
+  .panel.panel-info
+    .panel-heading
+      Pending Requests
+    %ul.list-group
+      - @requests.each do |friendship|
+        %li.list-group-item
+          = link_to friendship.user.username,
+            profile_path(friendship.user)
+
+- unless @friendships.empty?
+  .panel.panel-default
+    .panel-heading
+      Friends
+    %ul.list-group
+      - @friendships.each do |friendship|
+        %li.list-group-item
+          = link_to friendship.friend.username,
+            profile_path(friendship.friend)
+- else
+  .alert.alert-warning
+    You have no friends! You should work on that!

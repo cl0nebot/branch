@@ -1,7 +1,7 @@
 !!! html
 %html
   %head
-    %title= content_for(:title) || "Branch: Decentralized Democracy"
+    %title= "Branch: #{content_for(:title)}" || "Decentralized Democracy"
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
     = stylesheet_link_tag "application"
 
@@ -9,9 +9,25 @@
     %header
       = render partial: 'shared/navbar'
 
-    = yield
+
+    .container
+      - if user_signed_in?
+        .row
+          .col-lg-3
+            %ul.list-group
+              %li.list-group-item
+                = link_to "Matches", profiles_path
+              %li.list-group-item
+                = link_to "Friends", friendships_path
+                %span.badge= current_user.pending_friendships.count
+          .col-lg-9
+            = yield
+      - else
+        = yield
 
     %footer
       .container
         Some footer stuff will go here
+
+  = javascript_include_tag "application"
 

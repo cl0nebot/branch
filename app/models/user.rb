@@ -17,4 +17,16 @@ class User < ActiveRecord::Base
     ids = friends.pluck(:id)
     FeedItem.where(user_id: ids)
   end
+
+  def pending_friendships
+    Friendship.where(friend_id: self.id).unconfirmed
+  end
+
+  def is_friend?(user)
+    self.friendships.where(friend_id: user.id).confirmed.count > 0
+  end
+
+  def is_pending_friend?(user)
+    self.friendships.where(friend_id: user.id).unconfirmed.count > 0
+  end
 end
