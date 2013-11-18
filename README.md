@@ -38,6 +38,12 @@ Once you have those dependencies installed, run:
 $ bundle install
 ````
 
+Next, you'll need to seed the dev environment. (It'd be really boring if you were the only person on the site.):
+
+````
+$ rake db:setup db:seed
+````
+
 To run the application, run:
 
 ````
