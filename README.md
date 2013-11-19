@@ -1,5 +1,5 @@
 # Branch
-## The decentralized democracy and social platform
+## The borderless caucus social platform
 
 ---
 
