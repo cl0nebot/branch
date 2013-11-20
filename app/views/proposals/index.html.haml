@@ -1,31 +1,22 @@
-%h1 Listing proposals
+- content_for :title, 'My Proposals'
 
-%table
-  %tr
-    %th Subject
-    %th Body
-    %th User
-    %th Upvotes
-    %th Downvotes
-    %th Confidence
-    %th Heat
-    %th
-    %th
-    %th
-
-  - @proposals.each do |proposal|
-    %tr
-      %td= proposal.subject
-      %td= proposal.body
-      %td= proposal.user_id
-      %td= proposal.upvotes
-      %td= proposal.downvotes
-      %td= proposal.confidence
-      %td= proposal.heat
-      %td= link_to 'Show', proposal
-      %td= link_to 'Edit', edit_proposal_path(proposal)
-      %td= link_to 'Destroy', proposal, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
+%h1 My Proposals
 
 = link_to 'New Proposal', new_proposal_path
+
+%br/
+%br/
+
+- unless @proposals.empty?
+  %ul.unstyled
+    - @proposals.each do |proposal|
+      %li
+        %article.panel.panel-default
+          .panel-body
+            = render proposal
+
+          .panel-footer
+            %strong Score:
+            %span(class="#{proposal.upvotes < proposal.downvotes ? 'text-danger' : ''}")
+              = proposal.upvotes - proposal.downvotes
+

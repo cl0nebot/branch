@@ -2,7 +2,7 @@ class Profile < ActiveRecord::Base
   belongs_to :user
   has_many :answers
 
-  RADIUS = 10
+  RADIUS = 100
 
   class << self
     # This is faster than checking whether a profile
@@ -10,10 +10,11 @@ class Profile < ActiveRecord::Base
     # records, then test for being within the circle
     # later. Performance and all.
     def in_square_area(x, y)
-      where("xcoord <= #{x + RADIUS}").
-        where("ycoord <= #{y + RADIUS}").
-        where("xcoord >= #{x - RADIUS}").
-        where("ycoord >= #{y - RADIUS}")
+      where{
+        (xcoord <= my{x + RADIUS}) & 
+        (ycoord <= my{y + RADIUS}) &
+        (xcoord >= my{x - RADIUS}) &
+        (ycoord >= my{y - RADIUS}) }
     end
   end
 
@@ -25,9 +26,10 @@ class Profile < ActiveRecord::Base
 
   def match_percentage(profile)
     # hypotenuse before sqrt
-    square_hyp = profile.xcoord**2 + profile.ycoord**2
+    square_hyp = (profile.xcoord-self.xcoord)**2 + (profile.ycoord-self.ycoord)**2
     distance = Math.sqrt(square_hyp)
-    (1 - distance.to_f/RADIUS.to_f).abs
+
+    (max_distance-distance)/max_distance
   end
 
   def coords
@@ -77,6 +79,10 @@ class Profile < ActiveRecord::Base
 
   def within_circle?(x, y)
     (x - self.xcoord)**2 + (y - self.ycoord)**2 < RADIUS**2
+  end
+
+  def max_distance
+    @max_distance ||= Math.sqrt((200**2)*2)
   end
 
 end

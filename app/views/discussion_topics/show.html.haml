@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @discussion_topic.user_id
+%p
+  %b Subject:
+  = @discussion_topic.subject
+%p
+  %b Text:
+  = @discussion_topic.text
+%p
+  %b Upvotes:
+  = @discussion_topic.upvotes
+%p
+  %b Downvotes:
+  = @discussion_topic.downvotes
+%p
+  %b Heat:
+  = @discussion_topic.heat
+%p
+  %b Confidence:
+  = @discussion_topic.confidence
+
+= link_to 'Edit', edit_discussion_topic_path(@discussion_topic)
+\|
+= link_to 'Back', discussion_topics_path

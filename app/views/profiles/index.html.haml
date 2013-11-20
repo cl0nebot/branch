@@ -1,12 +1,11 @@
 - content_for :title, "Matches"
 
-.container
-  %h1 Your matches
-  
-  - unless @matches.empty?
-    %ol.unstyled
-      - @matches.each do |match|
-        = render partial: 'match', locals: {match: match}
-  - else
-    .alert.alert-warning
-      There are currently no new matches!
+%h1 Your matches
+
+- unless @matches.empty?
+  %ol.unstyled
+    - @matches.each do |match|
+      = render partial: 'match', locals: {match: match}
+- else
+  .alert.alert-warning
+    There are currently no new matches!

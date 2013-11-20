@@ -10,7 +10,7 @@ class ProposalsController < ApplicationController
   # GET /proposals/1
   # GET /proposals/1.json
   def show
-    @proposal = current_user.proposals.find(params[:id])
+    @proposal = Proposal.find(params[:id])
   end
 
   # GET /proposals/new

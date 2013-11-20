@@ -16,10 +16,13 @@
           .col-lg-3
             %ul.list-group
               %li.list-group-item
+                = link_to "My Proposals", proposals_path
+              %li.list-group-item
                 = link_to "Matches", profiles_path
               %li.list-group-item
                 = link_to "Friends", friendships_path
-                %span.badge= current_user.pending_friendships.count
+                - if current_user.has_pending_friendships?
+                  %span.badge= current_user.pending_friendships.count
           .col-lg-9
             = yield
       - else

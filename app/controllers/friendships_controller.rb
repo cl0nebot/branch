@@ -11,7 +11,7 @@ class FriendshipsController < ApplicationController
 
     if inverse
       # Confirm a Friendship
-      inverse.confirmed == true
+      inverse.confirmed = true
       @friendship = current_user.friendships.build({
         friend_id: params[:friend_id],
         confirmed: true
@@ -56,6 +56,14 @@ class FriendshipsController < ApplicationController
   end
 
   def destroy
+    @friendship = Friendship.find(params[:id])
+    @inverse = Friendship.where( user_id: @friendship.friend_id,
+                                friend_id: current_user.id ).first
+
+    @friendship.destroy
+    @inverse.destroy
+
+    redirect_to friendships_path
   end
 
   private

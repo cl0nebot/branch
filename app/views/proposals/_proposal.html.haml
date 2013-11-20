@@ -1,2 +1,4 @@
-%h2= proposal.subject
-= truncate(proposal.body, length: 150)
+%h2= link_to proposal.subject, proposal
+
+:markdown
+  #{truncate(proposal.body, length: 150)}

@@ -9,7 +9,7 @@ module ProfilesHelper
   end
 
   def match_percentage(match)
-    percentage = current_user.profile.match_percentage(match)
+    percentage = current_user.profile.match_percentage(match) * 100.0
     klass = 'text-danger'
 
     if percentage >= 90
@@ -22,4 +22,7 @@ module ProfilesHelper
       number_to_percentage(percentage, precision: 1)
     end
   end
+
+  private
+
 end

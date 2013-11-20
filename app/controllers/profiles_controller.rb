@@ -8,12 +8,14 @@ class ProfilesController < ApplicationController
     friend_ids = current_user.friends.pluck(:id)
     xcoord = @profile.xcoord
     ycoord = @profile.ycoord
+
     @matches = Profile.in_square_area(xcoord, ycoord).
-      where{user_id << friend_ids}.
-      limit(25).
-      to_a
-    @matches.select!{ |p| p.match? @profile }
-    @matches.sort!{ |p1, p2| @profile.match_percentage(p1) <=> @profile.match_percentage(p2) }
+      where{
+        (user_id << friend_ids) &
+        (user_id != my{current_user.id})
+      }.limit(25).to_a
+
+    @matches.sort!{ |p1, p2| @profile.match_percentage(p2) <=> @profile.match_percentage(p1) }
   end
 
   # GET /profiles/1

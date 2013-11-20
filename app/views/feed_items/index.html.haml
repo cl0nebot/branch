@@ -9,3 +9,8 @@
           = feed_item_verb(item)
         .panel-body
           = render item.feedable
+
+        .panel-footer
+          %strong Score:
+          %span(class="#{item.feedable.upvotes < item.feedable.downvotes ? 'text-danger' : ''}")
+            = item.feedable.upvotes - item.feedable.downvotes

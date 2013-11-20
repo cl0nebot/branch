@@ -1,4 +1,6 @@
 Branch::Application.routes.draw do
+  resources :discussion_topics
+
   get "matches/index"
   root 'pages#index'
 
@@ -10,7 +12,7 @@ Branch::Application.routes.draw do
 
   resources :amendments
 
-  resources :proposals, only: [:index, :new, :create]
+  resources :proposals, only: [:index, :show, :new, :create]
 
   resources :friendships, only: [:index, :create, :destroy]
 

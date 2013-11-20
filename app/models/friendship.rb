@@ -8,7 +8,7 @@ class Friendship < ActiveRecord::Base
     end
 
     def unconfirmed
-      where{confirmed == false}
+      where{confirmed != true}
     end
   end
 end

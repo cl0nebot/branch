@@ -4,7 +4,8 @@
       %img.media-object
 
     .article
-      %h4= full_name(match)
+      %h4= link_to full_name(match),
+        profile_path(match)
       = truncate(match.summary, length: 150)
 
   %footer.panel-footer

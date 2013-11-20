@@ -1,0 +1,31 @@
+%h1 Listing discussion_topics
+
+%table
+  %tr
+    %th User
+    %th Subject
+    %th Text
+    %th Upvotes
+    %th Downvotes
+    %th Heat
+    %th Confidence
+    %th
+    %th
+    %th
+
+  - @discussion_topics.each do |discussion_topic|
+    %tr
+      %td= discussion_topic.user_id
+      %td= discussion_topic.subject
+      %td= discussion_topic.text
+      %td= discussion_topic.upvotes
+      %td= discussion_topic.downvotes
+      %td= discussion_topic.heat
+      %td= discussion_topic.confidence
+      %td= link_to 'Show', discussion_topic
+      %td= link_to 'Edit', edit_discussion_topic_path(discussion_topic)
+      %td= link_to 'Destroy', discussion_topic, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Discussion topic', new_discussion_topic_path

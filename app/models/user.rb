@@ -12,6 +12,9 @@ class User < ActiveRecord::Base
   has_one :profile
 
   has_many :feed_items
+  has_many :proposals
+  has_many :amendments
+  has_many :comments
 
   def friends_feed_items
     ids = friends.pluck(:id)
@@ -20,6 +23,10 @@ class User < ActiveRecord::Base
 
   def pending_friendships
     Friendship.where(friend_id: self.id).unconfirmed
+  end
+
+  def has_pending_friendships?
+    pending_friendships.count > 0
   end
 
   def is_friend?(user)
