@@ -1,11 +1,10 @@
 %p#notice= notice
 
-%p
-  %b Subject:
-  = @proposal.subject
-%p
-  %b Body:
-  = @proposal.body
+%h1= @proposal.subject
+ 
+:markdown
+  #{@proposal.body}
+
 %p
   %b User:
   = @proposal.user_id
@@ -21,7 +20,3 @@
 %p
   %b Heat:
   = @proposal.heat
-
-= link_to 'Edit', edit_proposal_path(@proposal)
-\|
-= link_to 'Back', proposals_path
