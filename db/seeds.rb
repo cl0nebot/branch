@@ -1,4 +1,7 @@
 # create some dummy users
+users = []
+proposals = []
+
 20.times do |n|
   pass = SecureRandom.uuid
   u = User.create({
@@ -8,6 +11,8 @@
     password_confirmation: pass
   })
 
+  users << u
+
   p = Profile.create({
     user_id: u.id,
     first_name: Faker::Name.first_name,
@@ -16,16 +21,17 @@
     city: Faker::Address.city,
     state: Faker::Address.state,
     xcoord: (SecureRandom.random_number * 200 - 100).to_i,
-    ycoord: (SecureRandom.random_number * 200 - 100).to_i
+    ycoord: (SecureRandom.random_number * 200 - 100).to_i,
+    zcoord: (SecureRandom.random_number * 200 - 100).to_i
   })
 
   prop = Proposal.create({
     user_id: u.id,
     subject: Faker::Lorem.sentences(1).join(" "),
     body: Faker::Lorem.words(150).join(" "),
-    upvotes: SecureRandom.random_number * 100,
-    downvotes: SecureRandom.random_number * 100
   })
+
+  proposals << prop
 
   u.feed_items.publish(prop)
 
@@ -35,6 +41,21 @@
 
   prop.save
 end
+
+# Make some comments
+users.each do |user|
+  index = (SecureRandom.random_number * proposals.length).to_i
+  
+  Comment.create({
+    user_id: user.id,
+    commentable_string: "Proposal",
+    commentable_id: proposals[index].id,
+    body: Faker::Lorem.sentences(4).join(" ")
+  })
+
+end
+
+
 
 # create a test user. The reason why this shouldn't
 # be run in production should be made clear by the
@@ -57,15 +78,14 @@ if Rails.env.development?
     city: Faker::Address.city,
     state: Faker::Address.state,
     xcoord: (SecureRandom.random_number * 200 - 100).to_i,
-    ycoord: (SecureRandom.random_number * 200 - 100).to_i
+    ycoord: (SecureRandom.random_number * 200 - 100).to_i,
+    zcoord: (SecureRandom.random_number * 200 - 100).to_i
   })
 
   prop = Proposal.create({
     user_id: u.id,
     subject: Faker::Lorem.sentences(1).join(" "),
     body: Faker::Lorem.words(150).join(" "),
-    upvotes: SecureRandom.random_number * 100,
-    downvotes: SecureRandom.random_number * 100
   })
 
   u.feed_items.publish(prop)
@@ -93,7 +113,8 @@ if Rails.env.development?
       city: Faker::Address.city,
       state: Faker::Address.state,
       xcoord: (SecureRandom.random_number * 200 - 100).to_i,
-      ycoord: (SecureRandom.random_number * 200 - 100).to_i
+      ycoord: (SecureRandom.random_number * 200 - 100).to_i,
+      zcoord: (SecureRandom.random_number * 200 - 100).to_i
     })
 
     u.friendships.create({
@@ -110,8 +131,6 @@ if Rails.env.development?
       user_id: friend.id,
       subject: Faker::Lorem.sentences(1).join(" "),
       body: Faker::Lorem.words(150).join(" "),
-      upvotes: SecureRandom.random_number * 100,
-      downvotes: SecureRandom.random_number * 100
     })
 
     friend.feed_items.publish(prop)
@@ -139,7 +158,8 @@ if Rails.env.development?
     city: Faker::Address.city,
     state: Faker::Address.state,
     xcoord: (SecureRandom.random_number * 200 - 100).to_i,
-    ycoord: (SecureRandom.random_number * 200 - 100).to_i
+    ycoord: (SecureRandom.random_number * 200 - 100).to_i,
+    zcoord: (SecureRandom.random_number * 200 - 100).to_i
   })
 
   friend.friendships.create({

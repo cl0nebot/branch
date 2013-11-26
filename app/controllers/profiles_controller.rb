@@ -8,8 +8,9 @@ class ProfilesController < ApplicationController
     friend_ids = current_user.friends.pluck(:id)
     xcoord = @profile.xcoord
     ycoord = @profile.ycoord
+    zcoord = @profile.zcoord
 
-    @matches = Profile.in_square_area(xcoord, ycoord).
+    @matches = Profile.in_cube_area(xcoord, ycoord, zcoord).
       where{
         (user_id << friend_ids) &
         (user_id != my{current_user.id})

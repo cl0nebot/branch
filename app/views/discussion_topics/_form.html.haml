@@ -6,26 +6,13 @@
         - @discussion_topic.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :user_id
-    = f.number_field :user_id
-  .field
-    = f.label :subject
-    = f.text_field :subject
-  .field
-    = f.label :text
-    = f.text_area :text
-  .field
-    = f.label :upvotes
-    = f.number_field :upvotes
-  .field
-    = f.label :downvotes
-    = f.number_field :downvotes
-  .field
-    = f.label :heat
-    = f.text_field :heat
-  .field
-    = f.label :confidence
-    = f.text_field :confidence
-  .actions
-    = f.submit 'Save'
+  .form-group
+    = f.label :subject, :class => 'sr-only'
+    = f.text_field :subject, :class => 'form-control input-lg', :placeholder => 'Subject'
+
+  .form-group
+    = f.label :text, 'Prompt', :class => 'sr-only'
+    = f.text_area :text, :class => 'form-control input-lg', :placeholder => 'Prompt'
+
+  .form-group
+    = f.submit 'Save', :class => 'btn btn-primary btn-lg'

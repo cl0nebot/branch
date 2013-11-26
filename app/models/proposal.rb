@@ -3,4 +3,5 @@ class Proposal < ActiveRecord::Base
   has_many :amendments
   has_many :comments, as: :commentable
   has_many :feed_items, as: :feedable
+  has_many :votes, as: :voteable
 end

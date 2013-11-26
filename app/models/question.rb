@@ -1,14 +1,18 @@
 class Question < ActiveRecord::Base
   has_many :answers
 
-  HORIZONTAL = 0
-  VERTICAL = 1
+  HORIZONTAL = 0 # x
+  VERTICAL = 1 # y
+  LATERAL = 2 # z
 
   RIGHTWING = 1
   LEFTWING = -1
 
   AUTHORITARIAN = 1
   LIBERTARIAN = -1
+
+  CONSERVATIVE = 1
+  PROGRESSIVE = -1
 
   def is_horizontal?
     type == HORZONTAL
@@ -18,9 +22,14 @@ class Question < ActiveRecord::Base
     type == VERTICAL
   end
 
+  def is_lateral?
+    type == LATERAL
+  end
+
   def axis
     return :xcoord if is_horizontal?
-    return :ycoord
+    return :ycoord if is_vertical?
+    return :zcoord
   end
 
   def is_leftwing?
@@ -37,5 +46,13 @@ class Question < ActiveRecord::Base
 
   def is_libertarian?
     type == VERTICAL && parity == LIBERTARIAN
+  end
+
+  def is_conservative?
+    type == LATERAL && parity == CONSERVATIVE
+  end
+
+  def is_progressive?
+    type == LATERAL && parity == PROGRESSIVE
   end
 end

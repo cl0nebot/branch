@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131119094504) do
+ActiveRecord::Schema.define(version: 20131125045952) do
 
   create_table "amendments", force: true do |t|
     t.integer  "user_id"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20131119094504) do
     t.float    "heat"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "score"
   end
 
   create_table "answers", force: true do |t|
@@ -48,6 +49,7 @@ ActiveRecord::Schema.define(version: 20131119094504) do
     t.float    "heat"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "score"
   end
 
   create_table "discussion_topics", force: true do |t|
@@ -60,6 +62,7 @@ ActiveRecord::Schema.define(version: 20131119094504) do
     t.decimal  "confidence"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "score"
   end
 
   create_table "feed_items", force: true do |t|
@@ -91,9 +94,10 @@ ActiveRecord::Schema.define(version: 20131119094504) do
     t.datetime "updated_at"
     t.integer  "xcoord",      default: 0, null: false
     t.integer  "ycoord",      default: 0, null: false
+    t.integer  "zcoord"
   end
 
-  add_index "profiles", ["xcoord", "ycoord"], name: "index_on_profile_coordinates"
+  add_index "profiles", ["xcoord", "ycoord", "zcoord"], name: "index_on_profile_coordinates"
 
   create_table "proposals", force: true do |t|
     t.string   "subject"
@@ -105,6 +109,7 @@ ActiveRecord::Schema.define(version: 20131119094504) do
     t.float    "heat"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "score"
   end
 
   create_table "questions", force: true do |t|
@@ -135,5 +140,14 @@ ActiveRecord::Schema.define(version: 20131119094504) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "votes", force: true do |t|
+    t.integer  "user_id"
+    t.string   "voteable_type"
+    t.integer  "voteable_id"
+    t.integer  "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

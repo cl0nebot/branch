@@ -17,10 +17,6 @@ class DiscussionTopicsController < ApplicationController
     @discussion_topic = DiscussionTopic.new
   end
 
-  # GET /discussion_topics/1/edit
-  def edit
-  end
-
   # POST /discussion_topics
   # POST /discussion_topics.json
   def create
@@ -32,20 +28,6 @@ class DiscussionTopicsController < ApplicationController
         format.json { render action: 'show', status: :created, location: @discussion_topic }
       else
         format.html { render action: 'new' }
-        format.json { render json: @discussion_topic.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /discussion_topics/1
-  # PATCH/PUT /discussion_topics/1.json
-  def update
-    respond_to do |format|
-      if @discussion_topic.update(discussion_topic_params)
-        format.html { redirect_to @discussion_topic, notice: 'Discussion topic was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
         format.json { render json: @discussion_topic.errors, status: :unprocessable_entity }
       end
     end
@@ -69,6 +51,7 @@ class DiscussionTopicsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def discussion_topic_params
-      params.require(:discussion_topic).permit(:user_id, :subject, :text, :upvotes, :downvotes, :heat, :confidence)
+      params.require(:discussion_topic).permit(:subject, :text)
     end
 end
+

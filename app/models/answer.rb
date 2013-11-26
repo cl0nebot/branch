@@ -5,6 +5,7 @@ class Answer < ActiveRecord::Base
   class << self
     XAXIS = 0
     YAXIS = 1
+    ZAXIS = 2
 
     def xaxis
       where(axis: XAXIS)
@@ -12,6 +13,10 @@ class Answer < ActiveRecord::Base
 
     def yaxis
       where(axis: YAXIS)
+    end
+
+    def zaxis
+      where(axis: ZAXIS)
     end
   end
 
