@@ -4,9 +4,11 @@ module FeedItemsHelper
     when "Proposal"
       "proposed&hellip;".html_safe
     when "Amendment"
-      "amended "
+      link = link_to(feed_item.feedable.proposal.subject, proposal_path(feed_item.feedable.proposal))
+      "amended \"#{link}\"".html_safe
     when "Comment"
-      "commented on "
+      link = link_to(feed_item.feedable.commentable.subject, polymorphic_path(feed_item.feedable.commentable))
+      "commented on \"#{link}\"".html_safe
     end
   end
 end

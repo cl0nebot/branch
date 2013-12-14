@@ -1,0 +1,9 @@
+.media
+  .pull-left
+    = image_tag amendment.user.profile.avatar.url(:feed), :class => 'media-object img-thumbnail'
+
+  .media-body
+    %h2= link_to amendment.subject, amendment
+
+    :markdown
+      #{truncate(amendment.body, length: 150)}

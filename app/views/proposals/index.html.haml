@@ -17,6 +17,6 @@
 
           .panel-footer
             %strong Score:
-            %span(class="#{proposal.upvotes < proposal.downvotes ? 'text-danger' : ''}")
-              = proposal.upvotes - proposal.downvotes
+            %span(class="#{proposal.votes.ups < proposal.votes.downs ? 'text-danger' : ''}")
+              = proposal.votes.ups - proposal.votes.downs
 

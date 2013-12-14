@@ -44,7 +44,7 @@ class VotesController < ApplicationController
 
   def get_record
     if !params[:amendment_id].nil?
-      return Amenment.find(params[:amendment_id])
+      return Amendment.find(params[:amendment_id])
     elsif !params[:comment_id].nil?
       return Comment.find(params[:comment_id])
     elsif !params[:discussion_topic_id].nil?

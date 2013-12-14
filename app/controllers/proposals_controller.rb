@@ -11,6 +11,8 @@ class ProposalsController < ApplicationController
   # GET /proposals/1.json
   def show
     @proposal = Proposal.find(params[:id])
+    @amendments = @proposal.amendments.order(confidence: :desc)
+    @comments = @proposal.comments.order(confidence: :desc)
   end
 
   # GET /proposals/new

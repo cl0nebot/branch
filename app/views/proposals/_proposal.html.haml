@@ -1,4 +1,9 @@
-%h2= link_to proposal.subject, proposal
+.media
+  .pull-left
+    = image_tag proposal.user.profile.avatar(:feed), :class => 'media-object img-thumbnail'
 
-:markdown
-  #{truncate(proposal.body, length: 150)}
+  .media-body
+    %h2= link_to proposal.subject, proposal
+
+    :markdown
+      #{truncate(proposal.body, length: 150)}

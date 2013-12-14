@@ -2,6 +2,12 @@ class Profile < ActiveRecord::Base
   belongs_to :user
   has_many :answers
 
+  has_attached_file :avatar, styles: { 
+    medium: "140x140#",
+    thumb: "30x30#",
+    feed: "64x64#"
+  }, default_url: "/assets/profile/:style/avatar-blank.jpg"
+
   RADIUS = 100
 
   class << self

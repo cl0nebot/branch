@@ -1,5 +1,6 @@
 - if user_signed_in?
   %ul.nav.navbar-nav.navbar-right
+    = image_tag current_user.profile.avatar.url(:thumb), :class => 'avatar pull-left'
     %li.dropdown
       %a.dropdown-toggle(href="#" data-toggle="dropdown" data-no-turbolink="true")
         Welcome #{current_user.username}

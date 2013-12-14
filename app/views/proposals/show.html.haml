@@ -1,22 +1,47 @@
-%p#notice= notice
+%header
+  .media
+    .pull-left
+      = image_tag @proposal.user.profile.avatar.url(:feed), :class => 'media-object img-thumbnail'
 
-%h1= @proposal.subject
+    .media-body
+      %h1= @proposal.subject
  
-:markdown
-  #{@proposal.body}
+%article
+  :markdown
+    #{@proposal.body}
 
-%p
-  %b User:
-  = @proposal.user_id
-%p
-  %b Upvotes:
-  = @proposal.upvotes
-%p
-  %b Downvotes:
-  = @proposal.downvotes
-%p
-  %b Confidence:
-  = @proposal.confidence
-%p
-  %b Heat:
-  = @proposal.heat
+%aside
+  - if @amendments.count > 0 || @comments.count > 0
+    %ul.nav.nav-tabs
+      - if @amendments.count > 0
+        %li.active
+          %a(href="#amendments" data-toggle="tab") 
+            Amendments
+            = " (#{@amendments.count})"
+      - if @comments.count > 0
+        %li
+          %a(href="#comments" data-toggle="tab")
+            Comments
+            = " (#{@comments.count})"
+
+  %br/
+  %br/
+  
+  .tab-content
+    - if @amendments.count > 0
+      #amendments.tab-pane.active
+        - @amendments.each do |amendment|
+          .panel.panel-default
+            .panel-body
+              = render amendment
+            .panel-footer.clearfix
+              = voteable_footer(amendment)
+
+    - if @comments.count > 0
+      #comments.tab-pane
+        - @comments.each do |comment|
+          .panel.panel-default
+            .panel-body
+              = render comment
+            .panel-footer.clearfix
+              = voteable_footer(comment)

@@ -1,6 +1,6 @@
 - content_for :title, "Feed"
 
-%ul.unstyled
+%ul.unstyled.feed
   - @feed_items.each do |item|
     %li
       %article.panel.panel-default
@@ -10,7 +10,5 @@
         .panel-body
           = render item.feedable
 
-        .panel-footer
-          %strong Score:
-          %span(class="#{item.feedable.upvotes < item.feedable.downvotes ? 'text-danger' : ''}")
-            = item.feedable.upvotes - item.feedable.downvotes
+        .panel-footer.clearfix
+          = voteable_footer(item.feedable)

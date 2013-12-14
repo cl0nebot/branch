@@ -1,0 +1,7 @@
+.media
+  .pull-left
+    = image_tag comment.user.profile.avatar(:feed), :class => 'media-object img-thumbnail'
+  .media-body
+    %blockquote
+      :markdown
+        #{truncate(comment.body, length: 150)}

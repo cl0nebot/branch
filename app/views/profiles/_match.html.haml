@@ -1,9 +1,9 @@
 .panel.panel-default
-  .panel-body
+  .panel-body.media
     .pull-left
-      %img.media-object
+      = image_tag match.avatar.url(:feed), :class => 'img-thumbnail media-object'
 
-    .article
+    %article.media-body
       %h4= link_to full_name(match),
         profile_path(match)
       = truncate(match.summary, length: 150)

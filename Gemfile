@@ -40,6 +40,8 @@ gem 'devise', '~> 3.1.1'
 # Use unicorn as the app server
 # gem 'unicorn'
 
+gem "paperclip", "~> 3.0"
+
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 

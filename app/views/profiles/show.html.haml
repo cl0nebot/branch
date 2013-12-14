@@ -7,6 +7,7 @@
         %h2= match_percentage(@profile)
 
       - if @profile.user_id == current_user.id
+        = link_to "Edit Profile", edit_profile_path(@profile), :class => 'btn btn-success'
       - elsif @profile.user.is_friend?(current_user)
         %button.btn.btn-disabled Friend
       - elsif @profile.user.is_pending_friend?(current_user)
@@ -14,8 +15,13 @@
       - else
         = link_to "Add Friend", friendships_path(friend_id: @profile.user_id, authenticity: form_authenticity_token), method: :post, :class => 'btn btn-primary'
 
-    %h1= full_name(@profile)
-    #{@profile.city}, #{@profile.state}
+    .media
+      .pull-left
+        = image_tag @profile.avatar.url(:medium), :class => 'img-thumbnail media-object'
+
+      .media-body
+        %h1= full_name(@profile)
+        #{@profile.city}, #{@profile.state}
 
 
 .row

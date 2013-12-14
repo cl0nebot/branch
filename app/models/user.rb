@@ -16,6 +16,9 @@ class User < ActiveRecord::Base
   has_many :amendments
   has_many :comments
 
+  has_many :votes
+
+
   def friends_feed_items
     ids = friends.pluck(:id)
     FeedItem.where(user_id: ids)

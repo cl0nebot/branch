@@ -11,15 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131125045952) do
+ActiveRecord::Schema.define(version: 20131202053707) do
 
   create_table "amendments", force: true do |t|
     t.integer  "user_id"
     t.integer  "proposal_id"
     t.string   "subject"
     t.text     "body"
-    t.integer  "upvotes"
-    t.integer  "downvotes"
     t.float    "confidence"
     t.float    "heat"
     t.datetime "created_at"
@@ -40,11 +38,9 @@ ActiveRecord::Schema.define(version: 20131125045952) do
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
-    t.integer  "parent_id"
-    t.string   "parent_type"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
     t.text     "body"
-    t.integer  "upvotes"
-    t.integer  "downvotes"
     t.float    "confidence"
     t.float    "heat"
     t.datetime "created_at"
@@ -56,8 +52,6 @@ ActiveRecord::Schema.define(version: 20131125045952) do
     t.integer  "user_id"
     t.string   "subject"
     t.text     "text"
-    t.integer  "upvotes"
-    t.integer  "downvotes"
     t.decimal  "heat"
     t.decimal  "confidence"
     t.datetime "created_at"
@@ -92,9 +86,13 @@ ActiveRecord::Schema.define(version: 20131125045952) do
     t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "xcoord",      default: 0, null: false
-    t.integer  "ycoord",      default: 0, null: false
+    t.integer  "xcoord",              default: 0, null: false
+    t.integer  "ycoord",              default: 0, null: false
     t.integer  "zcoord"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "profiles", ["xcoord", "ycoord", "zcoord"], name: "index_on_profile_coordinates"
@@ -103,8 +101,6 @@ ActiveRecord::Schema.define(version: 20131125045952) do
     t.string   "subject"
     t.text     "body"
     t.integer  "user_id"
-    t.integer  "upvotes"
-    t.integer  "downvotes"
     t.float    "confidence"
     t.float    "heat"
     t.datetime "created_at"
