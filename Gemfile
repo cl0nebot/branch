@@ -49,7 +49,7 @@ gem "paperclip", "~> 3.0"
 # gem 'capistrano', group: :development
 
 # Use debugger
-gem 'debugger', '~> 1.6.2'
+gem 'debugger', '~> 1.6.2', group: [:test,:development]
 
 gem 'rspec-rails', '~> 2.0'
 gem 'simplecov', :require => false
