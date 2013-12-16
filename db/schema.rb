@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20131202053707) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "amendments", force: true do |t|
     t.integer  "user_id"
     t.integer  "proposal_id"
@@ -34,7 +37,7 @@ ActiveRecord::Schema.define(version: 20131202053707) do
     t.integer  "axis"
   end
 
-  add_index "answers", ["axis"], name: "index_on_answer_axis"
+  add_index "answers", ["axis"], name: "index_on_answer_axis", using: :btree
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
@@ -95,7 +98,7 @@ ActiveRecord::Schema.define(version: 20131202053707) do
     t.datetime "avatar_updated_at"
   end
 
-  add_index "profiles", ["xcoord", "ycoord", "zcoord"], name: "index_on_profile_coordinates"
+  add_index "profiles", ["xcoord", "ycoord", "zcoord"], name: "index_on_profile_coordinates", using: :btree
 
   create_table "proposals", force: true do |t|
     t.string   "subject"
@@ -116,7 +119,7 @@ ActiveRecord::Schema.define(version: 20131202053707) do
     t.datetime "updated_at"
   end
 
-  add_index "questions", ["type", "parity"], name: "index_on_question_type_and_parity"
+  add_index "questions", ["type", "parity"], name: "index_on_question_type_and_parity", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -134,8 +137,8 @@ ActiveRecord::Schema.define(version: 20131202053707) do
     t.string   "username"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "votes", force: true do |t|
     t.integer  "user_id"

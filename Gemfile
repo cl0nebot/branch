@@ -4,9 +4,12 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.1'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.3.0'
+gem 'pg'
 gem 'squeel'
 gem 'therubyracer', '~> 0.12.0'
+
+# for heroku
+gem 'rails_12factor', group: :production
 
 gem 'haml-rails', '~> 0.4'
 gem 'less-rails-bootstrap', '~> 3.0.5'
@@ -51,3 +54,5 @@ gem 'debugger', '~> 1.6.2'
 gem 'rspec-rails', '~> 2.0'
 gem 'simplecov', :require => false
 gem 'faker'
+
+ruby '2.0.0'
