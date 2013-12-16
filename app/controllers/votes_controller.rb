@@ -10,21 +10,19 @@ class VotesController < ApplicationController
 
     respond_to do |format|
       if @vote.save
-        Thread.new do
-          upvotes = @record.votes.up.count
-          downvotes = @record.votes.down.count
-          voter = Voter.new(upvotes, downvotes, @record.created_at)
+        upvotes = @record.votes.up.count
+        downvotes = @record.votes.down.count
+        voter = Voter.new(upvotes, downvotes, @record.created_at)
 
-          if @record.respond_to?(:heat)
-            @record.heat = voter.calculate_heat
-          end
-
-          if @record.respond_to?(:confidence)
-            @record.confidence = voter.calculate_confidence
-          end
-
-          @record.save
+        if @record.respond_to?(:heat)
+          @record.heat = voter.calculate_heat
         end
+
+        if @record.respond_to?(:confidence)
+          @record.confidence = voter.calculate_confidence
+        end
+
+        @record.save
 
         format.html { redirect_to(:back) }
         format.json { render json: @vote }

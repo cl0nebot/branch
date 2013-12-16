@@ -3,9 +3,11 @@ Branch::Application.routes.draw do
   get "matches/index"
   root 'pages#index'
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: "registrations" }
 
   resources :profiles
+
+  resources :answers, only: [:new, :create]
 
   resources :discussion_topics do
     resources :votes, only: [:create]

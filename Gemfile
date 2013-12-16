@@ -16,6 +16,7 @@ gem 'less-rails-bootstrap', '~> 3.0.5'
 gem 'markdown-rails'
 
 gem 'foreman'
+gem 'dotenv-rails', :groups => [:development, :test]
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

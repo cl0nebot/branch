@@ -15,44 +15,38 @@ class Question < ActiveRecord::Base
   PROGRESSIVE = -1
 
   def is_horizontal?
-    type == HORZONTAL
+    axis == HORZONTAL
   end
 
   def is_vertical?
-    type == VERTICAL
+    axis == VERTICAL
   end
 
   def is_lateral?
-    type == LATERAL
-  end
-
-  def axis
-    return :xcoord if is_horizontal?
-    return :ycoord if is_vertical?
-    return :zcoord
+    axis == LATERAL
   end
 
   def is_leftwing?
-    type == HORIZONTAL && parity == LEFTWING
+    axis == HORIZONTAL && parity == LEFTWING
   end
 
   def is_rightwing?
-    type == HORIZONTAL && parity == RIGHTWING
+    axis == HORIZONTAL && parity == RIGHTWING
   end
 
   def is_authoritarian?
-    type == VERTICAL && parity == AUTHORITARIAN
+    axis == VERTICAL && parity == AUTHORITARIAN
   end
 
   def is_libertarian?
-    type == VERTICAL && parity == LIBERTARIAN
+    axis == VERTICAL && parity == LIBERTARIAN
   end
 
   def is_conservative?
-    type == LATERAL && parity == CONSERVATIVE
+    axis == LATERAL && parity == CONSERVATIVE
   end
 
   def is_progressive?
-    type == LATERAL && parity == PROGRESSIVE
+    axis == LATERAL && parity == PROGRESSIVE
   end
 end

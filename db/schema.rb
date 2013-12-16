@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131202053707) do
+ActiveRecord::Schema.define(version: 20131216084817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,14 +112,14 @@ ActiveRecord::Schema.define(version: 20131202053707) do
   end
 
   create_table "questions", force: true do |t|
-    t.integer  "type"
+    t.integer  "axis"
     t.integer  "parity"
     t.string   "prompt"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "questions", ["type", "parity"], name: "index_on_question_type_and_parity", using: :btree
+  add_index "questions", ["axis", "parity"], name: "index_on_question_type_and_parity", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
