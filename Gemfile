@@ -15,6 +15,8 @@ gem 'haml-rails', '~> 0.4'
 gem 'less-rails-bootstrap', '~> 3.0.5'
 gem 'markdown-rails'
 
+gem 'foreman'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
