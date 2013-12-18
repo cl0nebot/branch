@@ -67,7 +67,7 @@ class Profile < ActiveRecord::Base
       elsif axis == 2
         zval += coord
       else
-        raise "Unrecognized axis while calculatig coordinates for profile #{id}"
+        raise "Unrecognized axis while calculatig coordinates for profile #{id}: #{axis}"
       end
     end
 
