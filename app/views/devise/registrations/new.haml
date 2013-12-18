@@ -8,8 +8,12 @@
 
         %fieldset
           .form-group
+            = f.label :username
+            = f.text_field :username, :autofocus => true, :class => 'form-control'
+
+          .form-group
             = f.label :email
-            = f.email_field :email, :autofocuse => true, :class => 'form-control'
+            = f.email_field :email, :class => 'form-control'
 
           .form-group
             = f.label :password

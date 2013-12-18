@@ -36,7 +36,7 @@ class Profile < ActiveRecord::Base
     # hypotenuse before sqrt
     square_hyp = (profile.xcoord-self.xcoord)**2 +
       (profile.ycoord-self.ycoord)**2 +
-      (profile.zcoord-self.zcoord)
+      (profile.zcoord-self.zcoord)**2
 
     distance = Math.sqrt(square_hyp)
 
@@ -57,6 +57,7 @@ class Profile < ActiveRecord::Base
     zdivisor = answers.zaxis.count
 
     answers.each do |answer|
+      debugger
       coord = answer.value
       axis = answer.axis
       

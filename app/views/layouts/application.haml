@@ -5,6 +5,7 @@
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
     = stylesheet_link_tag "application"
     = csrf_meta_tags
+    = javascript_include_tag "application"
 
   %body
     %header
@@ -31,7 +32,4 @@
 
     %footer
       .container
-        Some footer stuff will go here
-
-  = javascript_include_tag "application"
-
+        -# Some footer stuff will go here

@@ -28,6 +28,7 @@ class ProfilesController < ApplicationController
   def new
     @profile = Profile.new
     @profile.user_id = current_user.id
+    render :layout => 'ftue'
   end
 
   # GET /profiles/1/edit
