@@ -57,7 +57,6 @@ class Profile < ActiveRecord::Base
     zdivisor = answers.zaxis.count
 
     answers.each do |answer|
-      debugger
       coord = answer.value
       axis = answer.axis
       
