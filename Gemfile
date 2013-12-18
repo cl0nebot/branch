@@ -48,6 +48,7 @@ gem 'devise', '~> 3.1.1'
 # gem 'unicorn'
 
 gem "paperclip", "~> 3.0"
+gem 'aws-sdk'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
