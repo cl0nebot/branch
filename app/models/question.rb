@@ -15,7 +15,7 @@ class Question < ActiveRecord::Base
   PROGRESSIVE = -1
 
   def is_horizontal?
-    axis == HORZONTAL
+    axis == HORIZONTAL
   end
 
   def is_vertical?

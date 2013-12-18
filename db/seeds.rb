@@ -216,17 +216,3 @@ if Rails.env.development?
     })
   end
 end
-
-puts "Deleting all prior questions"
-Question.delete_all
-
-puts "Creating some dummy questions"
-100.times do
-  puts "making a question"
-  Question.create(
-    axis: (SecureRandom.random_number * 2).round,
-    parity: (SecureRandom.random_number * 2).round - 1,
-    prompt: Faker::Lorem.sentence(8)
-  )
-end
-

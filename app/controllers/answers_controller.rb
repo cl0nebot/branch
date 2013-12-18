@@ -2,11 +2,22 @@ class AnswersController < ApplicationController
   layout 'ftue'
 
   def new
-    axis = (SecureRandom.random_number * 3).round
+    axis = (SecureRandom.random_number * 2).round
     @question = Question.where(axis: axis).order('random()').first
+    @profile = current_user.profile
 
-    if @question.nil?
-      redirect_to new_answer_path
+    horizontal_count = @profile.answers.where(axis: 0).count
+    vertical_count = @profile.answers.where(axis: 1).count
+    lateral_count = @profile.answers.where(axis: 2).count
+
+    if (@question.is_horizontal? && horizontal_count >= 4) ||
+      (@question.is_vertical? && vertical_count >= 4) ||
+      (@question.is_lateral? && lateral_count >= 4)
+      redirect_to new_answer_path and return
+    end
+
+    if current_user.profile.answers.where(question_id: @question.id).count > 0
+      redirect_to new_answer_path and return
     end
 
     @answer = @question.answers.build(profile_id: current_user.profile.id, axis: axis)
@@ -28,7 +39,7 @@ class AnswersController < ApplicationController
 
     respond_to do |format|
       if @answer.save
-        if @profile.answers.count < 10
+        if @profile.answers.count < 12
           format.html { redirect_to new_answer_path }
           format.json { render json: [@answer, @profile] }
         else

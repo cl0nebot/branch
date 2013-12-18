@@ -30,6 +30,12 @@
       %h3 Match Questions
       %p To better match you with other users, please answer the following questions. You can skip questions, but you must answer at least ten.
 
+      .progress
+        .progress-bar(role="progressbar" style="width: #{current_user.profile.answers.count/12.0 * 100}%")
+          %span.sr-only #{current_user.profile.answers.count/12.0*100}%
+
+      .help-block #{12 - current_user.profile.answers.count} questions to go
+
 :javascript
   (function($) {
     $('#slider').slider({
