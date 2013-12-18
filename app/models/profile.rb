@@ -6,7 +6,7 @@ class Profile < ActiveRecord::Base
     medium: "140x140#",
     thumb: "30x30#",
     feed: "64x64#"
-  }, default_url: "/assets/profile/:style/avatar-blank.jpg"
+  }, default_url: "/images/profile/:style/avatar-blank.jpg"
 
   RADIUS = 100
 
