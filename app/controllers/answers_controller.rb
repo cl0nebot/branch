@@ -4,6 +4,11 @@ class AnswersController < ApplicationController
   def new
     axis = (SecureRandom.random_number * 3).round
     @question = Question.where(axis: axis).order('random()').first
+
+    if @question.nil?
+      redirect_to new_answer_path
+    end
+
     @answer = @question.answers.build(profile_id: current_user.profile.id, axis: axis)
   end
 
