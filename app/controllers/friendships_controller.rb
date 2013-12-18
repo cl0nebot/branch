@@ -38,8 +38,8 @@ class FriendshipsController < ApplicationController
         friend_id: params[:friend_id],
         confirmed: false
       })
-
-      if @friendship.save!
+      
+      if @friendship.save
         flash[:success] = "Friendship Requested"
         respond_to do |format|
           format.html { redirect_to profiles_path }

@@ -1,5 +1,13 @@
 - content_for :title, "Matches"
 
+- if flash[:success]
+  .alert.alert-success
+    = flash[:success]
+
+- if flash[:error]
+  .alert.alert-danger
+    = flash[:error]
+
 %h1 Your matches
 %p These are users whose political views are very similar to yours. Add them as friends and start sharing ideas!
 

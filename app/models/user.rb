@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
 
   has_many :votes
 
+  validates :username, presence: true, format: { with: /[a-z_]/ }
+
 
   def friends_feed_items
     ids = friends.pluck(:id)

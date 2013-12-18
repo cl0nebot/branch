@@ -5,7 +5,7 @@ class ProfilesController < ApplicationController
   # GET /profiles.json
   def index
     @profile = current_user.profile
-    friend_ids = current_user.friends.pluck(:id)
+    friend_ids = current_user.friendships.pluck(:friend_id)
     xcoord = @profile.xcoord
     ycoord = @profile.ycoord
     zcoord = @profile.zcoord

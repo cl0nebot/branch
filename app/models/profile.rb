@@ -2,6 +2,8 @@ class Profile < ActiveRecord::Base
   belongs_to :user
   has_many :answers
 
+  validates :first_name, :last_name, :summary, presence: true
+
   has_attached_file :avatar, styles: { 
     medium: "140x140#",
     thumb: "30x30#",
