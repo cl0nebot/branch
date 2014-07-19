@@ -1,0 +1,18 @@
+.panel.panel-default
+  .panel-body.media
+    .pull-left
+      = image_tag match.avatar.url(:feed), :class => 'img-thumbnail media-object'
+
+    %article.media-body
+      %h4= link_to full_name(match),
+        profile_path(match)
+      = truncate(match.summary, length: 150)
+
+  %footer.panel-footer
+    %strong
+      Match: 
+      = match_percentage(match)
+
+      .pull-right
+        = link_to "Add Friend", friendships_path(friend_id: match.id, authenticity_token: form_authenticity_token), method: :post
+

@@ -1,0 +1,32 @@
+source "https://rubygems.org"
+
+# Declare your gem's dependencies in matcher.gemspec.
+# Bundler will treat runtime dependencies like base dependencies, and
+# development dependencies will be added by default to the :development group.
+gemspec
+
+# Declare any dependencies that are still in development here instead of in
+# your gemspec. These might include edge Rails or gems from your path or
+# Git. Remember to move these dependencies to your gemspec before releasing
+# your gem to rubygems.org.
+
+# To use debugger
+# gem 'debugger'
+gem 'therubyracer', '~> 0.12.0'
+
+gem 'squeel'
+gem 'haml-rails', '~> 0.4'
+gem 'less-rails-bootstrap', '~> 3.0.5'
+gem 'markdown-rails'
+gem 'coffee-rails', '~> 4.0.0'
+
+# Use jquery as the JavaScript library
+gem 'jquery-rails', '~> 3.0.4'
+gem 'jquery-ui-rails'
+
+gem "paperclip", "~> 3.0"
+gem 'aws-sdk'
+
+gem 'rspec-rails', '~> 2.0'
+gem 'simplecov', :require => false
+gem 'faker'

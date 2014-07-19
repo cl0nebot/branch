@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
   has_many :inverse_friends, through: :inverse_friendships, source: :user
 
-  has_one :profile
+  has_one :profile, class_name: 'Matcher::Profile'
 
   has_many :feed_items
   has_many :proposals

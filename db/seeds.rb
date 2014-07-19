@@ -37,7 +37,7 @@ puts "creating some dummy users"
   users << u
 
   puts "Making a profile for #{u}"
-  p = Profile.create({
+  p = Matcher::Profile.create({
     user_id: u.id,
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -108,7 +108,7 @@ if Rails.env.development?
       })
     end
 
-    p = Profile.create({
+    p = Matcher::Profile.create({
       user_id: u.id,
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
@@ -139,7 +139,7 @@ if Rails.env.development?
         password_confirmation: pass
       })
 
-      Profile.create({
+      Matcher::Profile.create({
         user_id: friend.id,
         first_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
@@ -198,7 +198,7 @@ if Rails.env.development?
       password_confirmation: pass
     })
 
-    Profile.create({
+    Matcher::Profile.create({
       user_id: friend.id,
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,

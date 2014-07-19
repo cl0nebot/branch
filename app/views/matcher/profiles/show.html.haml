@@ -1,0 +1,29 @@
+- content_for :title, full_name(@profile)
+
+.panel.panel-default
+  .panel-body
+    .pull-right
+      - unless @profile.user_id == current_user.id
+        %h2= match_percentage(@profile)
+
+      - if @profile.user_id == current_user.id
+        = link_to "Edit Profile", edit_profile_path(@profile), :class => 'btn btn-success'
+      - elsif @profile.user.is_friend?(current_user)
+        %button.btn.btn-disabled Friend
+      - elsif @profile.user.is_pending_friend?(current_user)
+        = link_to "Confirm Friend", friendships_path(friend_id: @profile.user_id, authenticity: form_authenticity_token), method: :post, :class => 'btn btn-primary'
+      - else
+        = link_to "Add Friend", friendships_path(friend_id: @profile.user_id, authenticity: form_authenticity_token), method: :post, :class => 'btn btn-primary'
+
+    .media
+      .pull-left
+        = image_tag @profile.avatar.url(:medium), :class => 'img-thumbnail media-object'
+
+      .media-body
+        %h1= full_name(@profile)
+        #{@profile.city}, #{@profile.state}
+
+
+.row
+  .col-lg-8
+    = @profile.summary

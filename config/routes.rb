@@ -1,17 +1,15 @@
 Branch::Application.routes.draw do
-
-  get "matches/index"
   root 'pages#index'
 
   devise_for :users, controllers: { registrations: "registrations" }
 
-  resources :profiles
-
-  resources :answers, only: [:new, :create]
+  mount Matcher::Engine, at: 'matcher'
 
   resources :discussion_topics do
     resources :votes, only: [:create]
   end
+
+  resources :profiles
 
   resources :comments do
     resources :votes, only: [:create]
@@ -21,7 +19,7 @@ Branch::Application.routes.draw do
     resources :votes, only: [:create]
   end
 
-  resources :proposals, only: [:index, :show, :new, :create] do
+  resources :proposals, except: [:destroy] do
     resources :votes, only: [:create]
   end
 

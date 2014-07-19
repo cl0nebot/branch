@@ -10,7 +10,7 @@ class ProfilesController < ApplicationController
     ycoord = @profile.ycoord
     zcoord = @profile.zcoord
 
-    @matches = Profile.in_cube_area(xcoord, ycoord, zcoord).
+    @matches = Matcher::Profile.in_cube_area(xcoord, ycoord, zcoord).
       where{
         (user_id << friend_ids) &
         (user_id != my{current_user.id})
@@ -26,7 +26,7 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/new
   def new
-    @profile = Profile.new
+    @profile = Matcher::Profile.new
     @profile.user_id = current_user.id
     render :layout => 'ftue'
   end
@@ -38,12 +38,12 @@ class ProfilesController < ApplicationController
   # POST /profiles
   # POST /profiles.json
   def create
-    @profile = Profile.new(profile_params)
+    @profile = Matcher::Profile.new(profile_params)
     @profile.user_id = current_user.id
 
     respond_to do |format|
       if @profile.save
-        format.html { redirect_to new_answer_path, notice: 'Profile was successfully created.' }
+        format.html { redirect_to matcher.new_answer_path, notice: 'Profile was successfully created.' }
         format.json { render action: 'show', status: :created, location: @profile }
       else
         format.html { render action: 'new' }
@@ -79,7 +79,7 @@ class ProfilesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
-      @profile = Profile.find(params[:id])
+      @profile = Matcher::Profile.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

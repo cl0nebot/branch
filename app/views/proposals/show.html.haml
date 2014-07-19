@@ -1,3 +1,5 @@
+- content_for :title, @proposal.subject
+
 %header
   .media
     .pull-left
@@ -9,6 +11,29 @@
 %article
   :markdown
     #{@proposal.body}
+
+  - if @proposal.user_id == current_user.id
+    .well.clearfix
+      .pull-right= glyphicon_link 'Edit', edit_proposal_path(@proposal), 'edit', :class => 'btn btn-primary'
+
+  %h2 Edits
+  - if @proposal.versions.count > 0
+    #versions.panel-group
+      - @proposal.versions.each do |version|
+        .panel.panel-default
+          .panel-heading
+            %h4.panel-title
+              %a(data-toggle="collapse" data-parent="#versions" href="#v#{version.id}")
+                = version.created_at
+
+          .panel-collapse.collapse(id="v#{version.id}")
+            .panel-body
+              - reified = version.reify
+              %h4= reified.subject
+              :markdown
+                #{reified.body}
+
+    %hr/
 
 %aside
   - if @amendments.count > 0 || @comments.count > 0

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131216084817) do
+ActiveRecord::Schema.define(version: 20140127005321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,17 +27,6 @@ ActiveRecord::Schema.define(version: 20131216084817) do
     t.datetime "updated_at"
     t.integer  "score"
   end
-
-  create_table "answers", force: true do |t|
-    t.integer  "profile_id"
-    t.integer  "question_id"
-    t.integer  "value"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "axis"
-  end
-
-  add_index "answers", ["axis"], name: "index_on_answer_axis", using: :btree
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
@@ -78,7 +67,18 @@ ActiveRecord::Schema.define(version: 20131216084817) do
     t.datetime "updated_at"
   end
 
-  create_table "profiles", force: true do |t|
+  create_table "matcher_answers", force: true do |t|
+    t.integer  "matcher_profile_id"
+    t.integer  "matcher_question_id"
+    t.integer  "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "axis"
+  end
+
+  add_index "matcher_answers", ["axis"], name: "index_on_answer_axis", using: :btree
+
+  create_table "matcher_profiles", force: true do |t|
     t.integer  "user_id"
     t.string   "first_name"
     t.string   "last_name"
@@ -98,7 +98,17 @@ ActiveRecord::Schema.define(version: 20131216084817) do
     t.datetime "avatar_updated_at"
   end
 
-  add_index "profiles", ["xcoord", "ycoord", "zcoord"], name: "index_on_profile_coordinates", using: :btree
+  add_index "matcher_profiles", ["xcoord", "ycoord", "zcoord"], name: "index_on_profile_coordinates", using: :btree
+
+  create_table "matcher_questions", force: true do |t|
+    t.integer  "axis"
+    t.integer  "parity"
+    t.string   "prompt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "matcher_questions", ["axis", "parity"], name: "index_on_question_type_and_parity", using: :btree
 
   create_table "proposals", force: true do |t|
     t.string   "subject"
@@ -110,16 +120,6 @@ ActiveRecord::Schema.define(version: 20131216084817) do
     t.datetime "updated_at"
     t.integer  "score"
   end
-
-  create_table "questions", force: true do |t|
-    t.integer  "axis"
-    t.integer  "parity"
-    t.string   "prompt"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "questions", ["axis", "parity"], name: "index_on_question_type_and_parity", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -139,6 +139,17 @@ ActiveRecord::Schema.define(version: 20131216084817) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "versions", force: true do |t|
+    t.string   "item_type",  null: false
+    t.integer  "item_id",    null: false
+    t.string   "event",      null: false
+    t.string   "whodunnit"
+    t.text     "object"
+    t.datetime "created_at"
+  end
+
+  add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
   create_table "votes", force: true do |t|
     t.integer  "user_id"

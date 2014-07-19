@@ -1,0 +1,51 @@
+= form_for @profile, html: { multipart: true } do |f|
+  - if @profile.errors.any?
+    .alert.alert-danger
+      %h2= "#{pluralize(@profile.errors.count, "error")} prohibited this profile from being saved:"
+      %ul
+        - @profile.errors.full_messages.each do |msg|
+          %li= msg
+
+  .row
+    .col-lg-6
+      .form-group
+        = f.label :avatar, :class => 'control-label'
+        .well
+          %div
+            = image_tag @profile.avatar.url(:medium)
+          %br/
+          = f.file_field :avatar
+
+      .form-group
+        = f.label :first_name, :class => 'control-label'
+        = f.text_field :first_name, :class => 'form-control input-lg'
+
+      .form-group
+        = f.label :last_name, :class => 'control-label'
+        = f.text_field :last_name, :class => 'form-control input-lg'
+
+      .form-group
+        = f.label :nickname, :class => 'control-label'
+        = f.text_field :nickname, :class => 'form-control input-lg'
+
+      .form-group
+        = f.label :middle_name, :class => 'control-label'
+        = f.text_field :middle_name, :class => 'form-control input-lg'
+
+      .form-group
+        = f.label :city, :class => 'control-label'
+        = f.text_field :city, :class => 'form-control input-lg'
+
+      .form-group
+        = f.label :state, 'State/Province', :class => 'control-label'
+        = f.text_field :state, :class => 'form-control input-lg'
+
+    .col-lg-6
+      .form-group
+        = f.label :summary, :class => 'control-label'
+        = f.text_area :summary, :class => 'form-control', :rows => 25
+
+
+  .form-group
+    %hr/
+    = f.submit 'Save', :class => 'btn btn-primary btn-lg'

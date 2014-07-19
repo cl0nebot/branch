@@ -50,6 +50,9 @@ gem 'devise', '~> 3.1.1'
 gem "paperclip", "~> 3.0"
 gem 'aws-sdk'
 
+gem 'paper_trail', '~> 3.0.0'
+
+
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 
@@ -59,5 +62,7 @@ gem 'debugger', '~> 1.6.2', group: [:test,:development]
 gem 'rspec-rails', '~> 2.0'
 gem 'simplecov', :require => false
 gem 'faker'
+
+gem 'matcher', path: 'matcher'
 
 ruby '2.0.0'

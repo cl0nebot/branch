@@ -44,6 +44,23 @@ class ProposalsController < ApplicationController
     end
   end
 
+  def update
+    @proposal = current_user.proposals.find(params[:id])
+
+    respond_to do |format|
+      if @proposal.update(proposal_params)
+        # publish version to the feed
+        current_user.feed_items.publish(@proposal.versions.last)
+
+        format.html { redirect_to @proposal, notice: 'Proposal was successfully updated.' }
+        format.json { render action: 'show', status: :created, location: @proposal }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @proposal.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
     # Never trust parameters from the scary internet, only allow the white list through.

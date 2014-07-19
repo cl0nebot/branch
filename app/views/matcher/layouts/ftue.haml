@@ -1,0 +1,24 @@
+- @layout = "ftue"
+!!! html
+%html
+  %head
+    %title= "Branch: #{content_for(:title)}" || "Decentralized Democracy"
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    = stylesheet_link_tag "application"
+    = csrf_meta_tags
+    = javascript_include_tag "application"
+
+  %body
+    %header
+      = render partial: 'shared/navbar'
+
+
+    .container
+      .alert.alert-warning
+        This app is just a proof of concept at the moment. There will be <em>TONS</em> of errors. If you find something particularly egregious, please email me at info@jonlaing.com
+
+      = yield
+
+    %footer
+      .container
+        -# Some footer stuff will go here

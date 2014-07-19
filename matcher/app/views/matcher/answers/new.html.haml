@@ -1,0 +1,51 @@
+.row
+  .col-lg-8
+    %h1= @question.prompt
+    %hr/
+
+    = form_for @answer do |f|
+      <div id="slider"></div>
+      .row
+        .col-lg-6
+          .text-left.help-block Strongly Disagree
+        .col-lg-6
+          .text-right.help-block Strongly Agree
+
+      .text-center
+        %h2#slider-value 0
+
+      = f.hidden_field :question_id, value: @question.id
+      = f.hidden_field :axis, value: @question.axis
+      = f.hidden_field :parity, value: @question.parity
+      = f.number_field :value, :in => -100..100, :class => 'sr-only'
+
+      %hr/
+
+      .text-right
+        = link_to "Skip", new_answer_path(skip_id: @question.id), :class => 'btn btn-default btn-lg'
+        = f.submit "Next", :class => 'btn btn-primary btn-lg'
+
+  .col-lg-4
+    .well
+      %h3 Match Questions
+      %p To better match you with other users, please answer the following questions. You can skip questions, but you must answer at least ten.
+
+      .progress
+        .progress-bar(role="progressbar" style="width: #{current_user.profile.answers.count/12.0 * 100}%")
+          %span.sr-only #{current_user.profile.answers.count/12.0*100}%
+
+      .help-block #{12 - current_user.profile.answers.count} questions to go
+
+:javascript
+  (function($) {
+    $('#slider').slider({
+      min: -100,
+      max: 100,
+      value: 0,
+      slide: function( event, ui ) {
+        $('#answer_value').val(ui.value);
+        $('#slider-value').text(ui.value);
+
+      }
+    });
+  })(jQuery);
